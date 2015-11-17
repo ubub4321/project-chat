@@ -12,14 +12,32 @@ int list_c[MAX_CLIENT]; //채팅 참가중인 클라이언트에 대한 연결�
 char escape[ ] = "Q";
 char greeting[ ] = "Welcome to my chatting room\n";
 char CODE200[ ] = "Sorry room is full\n";
+char *excapechar = "exit\n"; //exit character insert
 void main (int argc, char *argv[])
 {
+ int server_fd, clinet_fd; //소켓번호 저장용
  int c_socket, s_socket;
- struct sockaddr_in s_addr, c_addr;
+ struct sockaddr_in s_addr, c_addr; //SOCKET STRUCTURE
+ int senline[CHATDATA], rbuf[CHATDATA]; //INPUT VECTOR
  int len;
  int nfds = 0;
  int i,j,n;
  fd_set read_fds;
  char chatData[CHATDATA];
  int res;
+
+	if(argc < 2) //매개변수가 모자르면
+	{
+		//에러메시지 출력
+		printf("ussage : %s TCP_PORT\N", argv[0]);
+		return -1;
+	}
+	//소켓생성
+	if((server_fd = socket(PF_INET, SOCK_STREAM, 0)) <0)
+	{
+		printf("server : can't open stream socket\n");
+		return -1;
+	}
+
+	printf("SOCKET = %d\n",server_fd); //소켓번호출력
  }
