@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <netinet.h>
+#include <curses.h>
+
+void main()
+{
+
+	printf("dsadsada");
+	
+	initwin();
+}
