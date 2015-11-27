@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,15 +12,16 @@ int main(int argc,char* argv[])
 {
 	int serv_sock;
 	int conn_sock;
+	int option;
 
 	struct sockaddr_in serv_addr;
 	struct sockaddr_in conn_addr;
 
 	int addrlen, datalen;
-	
+
 	char buf[MAXLINE + 1];
 	int nbytes;
-	
+
 	pid_t pid;
 
 	if(argc != 2)
@@ -39,6 +41,8 @@ int main(int argc,char* argv[])
 	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	serv_addr.sin_port = htons(atoi(argv[1]));
 
+	option = 1;
+	setsockopt(serv_sock,SOL_SOCKET,SO_REUSEADDR,&option,sizeof(option));
 	if(bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)
 	{
 		perror("bind() error\n");
@@ -95,6 +99,7 @@ int main(int argc,char* argv[])
 				exit(0);
 			}
 		}
+		
 		return 0;
 	}
 
