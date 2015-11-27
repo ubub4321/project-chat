@@ -44,7 +44,58 @@ int main(int argc,char* argv[])
 		perror("bind() error\n");
 		exit(0);
 	}
+	if(listen(serv_sock, 1) == -1)
+	{
+		perror("listen() error\n");
+		exit(0);
+	}
 
 	addrlen = sizeof(conn_sock);
+	conn_sock = accept(serv_sock, (struct sockaddr*)&conn_addr, &addrlen);
+
+	if(conn_sock == -1)
+	{
+		perror("accept() error\n");
+		exit(0);
+	}
+
+	if((pid=fork())==-1
+	{
+		close(conn_sock);
+		perror("fork() error");
+		exit(0);
+	}
+	else if (pid == 0)
+	{
+		while(1)
+		{
+			fgets(buf,sizeof(buf),stdin);
+			nbytes = strlen(buf);
+			write(conn_sock,buf,MAXLINE);
+			if((strncmp, "exit", 4) == 0)
+			{
+				puts("GOOD BYE");
+				exit(0);
+			}
+		}
+		exit(0);
+	}
+	else if(pid>0)
+	{
+		while(1)
+		{
+			if((nbytes = read(conn_sock,buf,MAXLINE)) < 0)
+			{
+				perror("read() error\n");
+				exit(0);
+			}
+			printf("%s", buf);
+			if(strncmp(buf, "exit",4)==0)
+			{
+				exit(0);
+			}
+		}
+		return 0;
+	}
 
 }
