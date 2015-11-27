@@ -59,7 +59,7 @@ int main(int argc,char* argv[])
 		exit(0);
 	}
 
-	if((pid=fork())==-1
+	if((pid=fork())==-1)
 	{
 		close(conn_sock);
 		perror("fork() error");
