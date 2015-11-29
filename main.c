@@ -17,7 +17,7 @@ void main (int argc, char *argv[])
  int c_socket, s_socket;
  struct sockaddr_in s_addr, c_addr;
  int len;
- int nfds =10;
+ int nfds =11;
  int i,j,n;
  fd_set read_fds;
  char chatData[CHATDATA];
