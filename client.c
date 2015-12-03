@@ -1,10 +1,10 @@
-#include<stdio.h>
+
+ #include<stdio.h>
  #include<stdlib.h>
  #include<string.h>
  #include<unistd.h>
-
-#include<arpa/inet.h> // AF_INET 외부 네트워크 도메인
-#include<sys/types.h>
+ #include<arpa/inet.h> // AF_INET 외부 네트워크 도메인
+ #include<sys/types.h>
  #include<sys/socket.h>
 
 #define MAXLINE 511
@@ -57,7 +57,19 @@ int main(int argc,char *argv[]){
          exit(0);
 
     }
-        
+     else if(pid>0){ //부모프로세스. server가 보낸 문자열을 받아 출력한다.
+         while(1){    //역시 exit 를 받을시 종료
+            if(nbytes = read(cli_sock,buf,MAXLINE) <0){
+                 perror("read() error\n");
+                 exit(0);
+             }
+             printf("%s",buf);
+             if(strncmp(buf,"exit",4) == 0)
+                 exit(0);
+             }
+     }
+
     close(cli_sock);
      return 0;
  }
+
