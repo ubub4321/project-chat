@@ -11,9 +11,10 @@
 int main(int argc,char* argv[]){
      int serv_sock;
      int conn_sock;
+	int option
 
     struct sockaddr_in serv_addr;
-     struct sockaddr_in conn_addr;
+    struct sockaddr_in conn_addr;
 
     int addrlen, datalen;
 
@@ -37,6 +38,9 @@ int main(int argc,char* argv[]){
      serv_addr.sin_family = AF_INET;
      serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
      serv_addr.sin_port = htons(atoi(argv[1]));
+	
+	option = 1;
+        setsockopt(serv_sock,SOL_SOCKET,SO_REUSEADDR,&option,sizeof(option));
 
     if(bind(serv_sock, (struct sockaddr*)&serv_addr,sizeof(serv_addr)) == -1){
          perror("bind() error\n"); 
@@ -49,7 +53,7 @@ int main(int argc,char* argv[]){
      }
 
     addrlen = sizeof(conn_sock);
-     conn_sock = accept(serv_sock, (struct sockaddr*)&conn_addr, &addrlen); //전화오기를 기다림.
+    conn_sock = accept(serv_sock, (struct sockaddr*)&conn_addr, &addrlen); //전화오기를 기다림.
 
     if(conn_sock == -1){
          perror("accept() error\n");
