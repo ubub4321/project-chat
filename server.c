@@ -11,7 +11,7 @@
 int main(int argc,char* argv[]){
      int serv_sock;
      int conn_sock;
-	int option
+	int option;
 
     struct sockaddr_in serv_addr;
     struct sockaddr_in conn_addr;
@@ -38,7 +38,7 @@ int main(int argc,char* argv[]){
      serv_addr.sin_family = AF_INET;
      serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
      serv_addr.sin_port = htons(atoi(argv[1]));
-	
+
 	option = 1;
         setsockopt(serv_sock,SOL_SOCKET,SO_REUSEADDR,&option,sizeof(option));
 
