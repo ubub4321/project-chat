@@ -7,7 +7,7 @@
 #include<sys/socket.h>
 
 #define MAXLINE 511
-
+//여기다 귓속말, 채팅창 클리어 등의 기능 추가?? 
 int main(int argc,char* argv[]){
      int serv_sock;
      int conn_sock;
@@ -64,7 +64,7 @@ int main(int argc,char* argv[]){
      }
     else
     {
-	printf("\n %s(%d)님이 들어오쎴습니다.\n",inet_ntoa(conn_addr.sin_addr),ntohs(conn_addr.sin_port));
+	printf("\n %s(%d)님이 들어오셨습니다.\n",inet_ntoa(conn_addr.sin_addr),ntohs(conn_addr.sin_port));
     }
 
     if((pid=fork())==-1){close(conn_sock);perror("fork() error");exit(0);}
