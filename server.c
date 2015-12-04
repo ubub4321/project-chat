@@ -39,7 +39,9 @@ int main(int argc,char* argv[]){
      serv_addr.sin_family = AF_INET;
      serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
      serv_addr.sin_port = htons(atoi(argv[1]));
-
+//프로그램을 강제 종료하든 그냥 종료하든 다시 실행하면 bind() 에서 에러가 발생합니다.
+//프로그램에서 소켓을 close() 함수를 이용하여 소켓을 소멸 시켜도 커널은 바로 속멸 시키지 않고 몇 초 정도 생명을 유지시켜 줍니다.
+//SO_REUSEADDR을 지정해 주면 같은 포트에 대해 다른 소켓이 bind()되는 것을 허락해 주기 때문에 bind()에러 없이 프로그램을 실행할 수 있습니다.
 	option = 1;
         setsockopt(serv_sock,SOL_SOCKET,SO_REUSEADDR,&option,sizeof(option));
 
