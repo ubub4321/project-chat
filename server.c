@@ -64,7 +64,7 @@ int main(int argc,char* argv[]){
      else if (pid == 0){
 
         while(1){
-             fgets(buf,sizeof(buf),stdin);
+            fgets(buf,sizeof(buf),stdin);
              nbytes = strlen(buf);
              write(conn_sock,buf,MAXLINE);
              if((strncmp,"exit",4) == 0){
@@ -81,7 +81,7 @@ int main(int argc,char* argv[]){
                  perror("read() error\n");
                  exit(0);
              }
-             printf("%s",buf);
+             printf("\n상대방[%s]: %s",inet_ntoa(conn_addr.sin_addr),buf);
              if(strncmp(buf,"exit",4) == 0)
                  exit(0);
              }

@@ -46,7 +46,7 @@ int main(int argc,char *argv[]){
      }
      else if(pid == 0) { //자식 프로세스 부분. stdin로 사용자가 입력한 문자를 buf에 저장하여 소켓에다
         while(1){        //write 시스템콜을 이용해 server에게 문자를 보낸다. exit 입력시 종료
-            fgets(buf,sizeof(buf),stdin);
+           fgets(buf,sizeof(buf),stdin);
              nbytes = strlen(buf);
              write(cli_sock,buf,MAXLINE);
              if((strncmp,"exit",4) == 0){
@@ -63,7 +63,7 @@ int main(int argc,char *argv[]){
                  perror("read() error\n");
                  exit(0);
              }
-             printf("%s",buf);
+             printf("상대방[%s]: %s",argv[1],buf);
              if(strncmp(buf,"exit",4) == 0)
                  exit(0);
              }
